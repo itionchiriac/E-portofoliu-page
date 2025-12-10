@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ion Chiriac - CV Digital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #10b981;
+            --light-color: #f8fafc;
+            --dark-color: #0f172a;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+        
+        body {
+            color: #334155;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header cu cercul pozei */
+        .header-main {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2563eb 100%);
+            color: white;
+            padding: 2.5rem 0 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .header-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,70 Q25,40 50,70 T100,70 L100,100 L0,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+        
+        /* Cercul cu poza */
+        .profile-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            border: 6px solid white;
+            box-shadow: 0 0 0 4px var(--accent-color), 0 10px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            background: linear-gradient(135deg, #3b82f6, #10b981);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+            z-index: 10;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .profile-circle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 4px var(--accent-color), 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .profile-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #3b82f6, #10b981);
+            color: white;
+            font-size: 4rem;
+            font-weight: bold;
+        }
+        
+        .profile-placeholder span {
+            font-size: 1.1rem;
+            margin-top: 10px;
+            font-weight: normal;
+        }
+        
+        /* Info personale */
+        .personal-info {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 10;
+            position: relative;
+        }
+        
+        .personal-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            text-align: left;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        
+        .info-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .profile-name {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .profile-title {
+            font-size: 1.4rem;
+            color: #dbeafe;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem;
+            border-radius: 50px;
+            max-width: 700px;
+            margin: 1rem auto 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 10;
+            position: relative;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Main sections */
+        section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--secondary-color), var(--accent-color));
+            bottom: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+        
+        /* About section */
+        .about-section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .description-box {
+            line-height: 1.8;
+        }
+        
+        .description-box p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .university-info {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 1.8rem;
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--secondary-color);
+        }
+        
+        .university-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        
+        /* Skills sections */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skills-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        
+        .skills-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .skills-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        
+        .skills-list {
+            list-style-type: none;
+        }
+        
+        .skills-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .skills-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .skill-icon {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            width: 24px;
+        }
+        
+        /* Gallery */
+        .gallery-section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .gallery-description {
+            margin-bottom: 2rem;
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+        
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            height: 220px;
+            position: relative;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            padding: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
+        }
+        
+        /* Contact section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2563eb 100%);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-section .section-title {
+            color: white;
+        }
+        
+        .contact-section .section-title::after {
+            background: var(--accent-color);
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-text h4 {
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-text a {
+            color: #dbeafe;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-text a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 0;
+            margin-top: 4rem;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo span {
+            color: var(--accent-color);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-circle {
+                width: 170px;
+                height: 170px;
+            }
+            
+            .profile-name {
+                font-size: 2.2rem;
+            }
+            
+            .profile-title {
+                font-size: 1.2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            nav a {
+                width: 200px;
+                justify-content: center;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .personal-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .profile-circle {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header cu cercul pozei -->
+    <header class="header-main">
+        <div class="container">
+            <!-- Cercul cu poza -->
+            <div class="profile-circle">
+                <!-- Înlocuiește cu poza ta -->
+                <div class="profile-placeholder">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Ion Chiriac</span>
+                </div>
+                <!-- Dacă ai o poză, folosește această linie în loc de cea de mai sus -->
+                <!-- <img src="calea/catre/poza_ta.jpg" alt="Ion Chiriac" class="profile-image"> -->
+            </div>
+            
+            <!-- Nume și titlu -->
+            <h1 class="profile-name">Ion Chiriac</h1>
+            <div class="profile-title">Student în Informatică | Viitor Developer</div>
+            
+            <!-- Info personale -->
+            <div class="personal-info">
+                <div class="personal-info-grid">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-birthday-cake"></i>
+                        </div>
+                        <div>
+                            <strong>Data nașterii:</strong> 18/05/2005
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <strong>Locul nașterii:</strong> Cahul, Moldova
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-passport"></i>
+                        </div>
+                        <div>
+                            <strong>Cetățenie:</strong> moldoveană
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-venus-mars"></i>
+                        </div>
+                        <div>
+                            <strong>Gen:</strong> Masculin
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigare -->
+            <nav>
+                <ul>
+                    <li><a href="#about" class="active"><i class="fas fa-user"></i> Despre mine</a></li>
+                    <li><a href="#skills"><i class="fas fa-code"></i> Competențe</a></li>
+                    <li><a href="#gallery"><i class="fas fa-images"></i> Galerie</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Secțiunea Despre mine -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Despre mine</h2>
+            
+            <div class="about-section">
+                <div class="about-content">
+                    <div class="description-box">
+                        <p><strong>Student motivat</strong> la specialitatea Informatică, cu o bază solidă în algoritmi, structuri de date și programare orientată pe obiecte. Interesat de dezvoltarea software, testare și soluții tehnologice moderne.</p>
+                        
+                        <p>Capabil să lucreze în echipă, să rezolve probleme complexe și să învețe rapid tehnologii noi. Caut oportunitatea de a aplica cunoștințele teoretice în proiecte practice și de a dobândi experiență profesională.</p>
+                    </div>
+                    
+                    <div class="university-info">
+                        <h3><i class="fas fa-university"></i> Educație</h3>
+                        <p><strong>Universitatea de Stat "Bogdan Petriceicu Hasdeu" din Cahul</strong></p>
+                        <p>Student la specialitatea <strong>Informatică</strong></p>
+                        <p style="margin-top: 1rem; color: var(--primary-color); font-weight: 500;">
+                            <i class="fas fa-calendar-alt"></i> În curs de studii
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secțiunea Competențe -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-tools"></i> Competențe</h2>
+            
+            <div class="skills-container">
+                <!-- Competențe tehnice -->
+                <div class="skills-card">
+                    <h3><i class="fas fa-laptop-code"></i> Competențe tehnice</h3>
+                    <ul class="skills-list">
+                        <li>
+                            <span class="skill-icon"><i class="fas fa-code"></i></span>
+                            <strong>Limbaje de programare:</strong> C++, Java, Python, C# (începător–mediu)
+                        </li>
+                        <li>
+                            <span class="skill-icon"><i class="fas fa-database"></i></span>
+                            <strong>Baze de date:</strong> MySQL, SQL Server, SQLite
+                        </li>
+                        <li>
+                            <span class="skill-icon"><i class="fas fa-cogs"></i></span>
+                            <strong>Concepte:</strong> Algoritmi și structuri de date, POO, rețelistică de bază, arhitectura calculatoarelor
+                        </li>
+                        <li>
+                            <span class="skill-icon"><i class="fas fa-wrench"></i></span>
+                            <strong>Instrumente:</strong> Git/GitHub, Visual Studio, VS Code, IntelliJ
+                        </li>
+                        <li>
+                            <span class="skill-icon"><i class="fas fa-desktop"></i></span>
+                            <strong>Sisteme de operare:</strong> Windows 10/11, Linux (nivel de bază)
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Competențe personale -->
+                <div class="skills-card">
+                    <h3><i class="fas fa-user-check"></i> Competențe personale</h3>
+                    <ul class="skills-list">
+                        <li>
+                            <span class="skill-icon"><i class="fas fa-brain"></i></span>
+                            Gândire logică și analitică
+                        </li>
+                        <li>
+                            <span class="skill-icon"><i class="fas fa-comments"></i></span>
+                            Comunicare eficientă
+                        </li>
+                        <li>
+                            <span class="skill-icon"><i class="fas fa-sync-alt"></i></span>
+                            Adaptabilitate
+                        </li>
+                        <li>
+                            <span class="skill-icon"><i class="fas fa-search"></i></span>
+                            Atenție la detalii
+                        </li>
+                        <li>
+                            <span class="skill-icon"><i class="fas fa-book-open"></i></span>
+                            Dorință de învățare continuă
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galerie -->
+    <section id="gallery">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-images"></i> Galerie</h2>
+            
+            <div class="gallery-section">
+                <p class="gallery-description">O colecție de imagini care ilustrează interesul meu pentru tehnologie și dezvoltare software:</p>
+                
+                <div class="gallery-container">
+                    <!-- Imagine 1 -->
+                    <div class="gallery-item">
+                        <img src="IMG_20241229_211557_012.jpg" alt="Programare">
+                        <div class="gallery-caption">
+                           
+                        </div>
+                    </div>
+                    
+                    <!-- Imagine 2 -->
+                    <div class="gallery-item">
+                        <img src="IMG_20250423_214732_579.jpg" alt="Laptop cu cod">
+                        <div class="gallery-caption">
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Imagine 3 -->
+                    <div class="gallery-item">
+                        <img src="IMG_20251117_085423_497.jpg" alt="Analiză de date">
+                        <div class="gallery-caption">
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Imagine 4 -->
+                    <div class="gallery-item">
+                        <img src="PXL_20240928_092445380.PORTRAIT~2.jpg" alt="Colaborare">
+                        <div class="gallery-caption">
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Imagine 5 -->
+                    <div class="gallery-item">
+                        <img src="PXL_20240928_105511672.MP.jpg" alt="Învățare">
+                        <div class="gallery-caption">
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Imagine 6 -->
+                    <div class="gallery-item">
+                        <img src="IMG_20240414_212244_633.jpg" alt="Proiecte tehnologice">
+                        <div class="gallery-caption">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-section">
+                <h2 class="section-title"><i class="fas fa-envelope"></i> Contact</h2>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <a href="mailto:itionchiriac@gmail.com">itionchiriac@gmail.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>LinkedIn</h4>
+                            <a href="https://www.linkedin.com/in/ion-chiriac-936aab386/" target="_blank">linkedin.com/in/ion-chiriac-936aab386</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Locație</h4>
+                            <p>Cahul, Moldova</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Universitate</h4>
+                            <p>Universitatea de Stat "Bogdan Petriceicu Hasdeu" din Cahul</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Ion <span>Chiriac</span></div>
+                <p>Student în Informatică | Viitor Developer</p>
+                
+                <div class="social-links">
+    <a href="https://www.linkedin.com/in/ion-chiriac-936aab386/" target="_blank" title="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+    </a>
+    <a href="mailto:itionchiriac@gmail.com" title="Email">
+        <i class="fas fa-envelope"></i>
+    </a>
+    <a href="https://github.com/itionchiriac/E-portofoliu" target="_blank" title="GitHub">
+        <i class="fab fa-github"></i>
+    </a>
+</div>
+                
+                <p>&copy; 2025 Ion Chiriac. </p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #cbd5e1;">Site creat pentru prezentarea profesională</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling pentru linkurile de navigare
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Elimină clasa active de la toate linkurile
+                document.querySelectorAll('nav a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Adaugă clasa active la linkul apăsat
+                this.classList.add('active');
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Activarea linkurilor în funcție de secțiunea vizibilă
+        window.addEventListener('scroll', function() {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Animație pentru cercul profilului
+        document.addEventListener('DOMContentLoaded', function() {
+            const circle = document.querySelector('.profile-circle');
+            circle.style.opacity = '0';
+            circle.style.transform = 'scale(0.8)';
+            
+            setTimeout(() => {
+                circle.style.transition = 'all 0.8s ease-out';
+                circle.style.opacity = '1';
+                circle.style.transform = 'scale(1)';
+            }, 300);
+            
+            // Animație pentru elemente la scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observează elementele care vor fi animate
+            document.querySelectorAll('.skills-card, .gallery-item, .contact-item').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(el);
+            });
+        });
+        
+        // Efect de hover pentru carduri
+        document.querySelectorAll('.skills-card, .gallery-item').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.15)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = 'var(--shadow)';
+            });
+        });
+    </script>
+</body>
+</html>
